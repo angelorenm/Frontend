@@ -1,49 +1,50 @@
-        <div class="layout">
+<div class="layout">
 
-            <div class="container d-flex flex-column">
-                <div class="row align-items-center justify-content-center no-gutters min-vh-100">
+    <div class="container d-flex flex-column">
+        <div class="row align-items-center justify-content-center no-gutters min-vh-100">
 
-                    <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
+            <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
 
-                        <!-- Heading -->
-                        <h1 class="font-bold text-center">Iniciar Sesion</h1>
+                <!-- headline-->
+                <!--prueba para modificar el archivo desde la interfaz-->
+                <h1 class="font-bold text-center">BIENVENIDO</h1>
 
-                        <!-- Text -->
-                        <p class="text-center mb-6">Bienvenidos a nuestra red social.</p>
+                <!-- Text -->
+                <p class="text-center mb-6">Bienvenid@s a chat web.</p>
 
-                        <!-- Form -->
-                        <form class="mb-6">
-                            <!-- Email -->
-                            <div class="form-group">
-                                <label for="email" class="sr-only">Correo Electrónico</label>
-                                <input type="email" class="form-control form-control-lg" id="email" placeholder="Correo Electrónico">
-                            </div>
-
-                            <!-- Password -->
-                            <div class="form-group">
-                                <label for="password" class="sr-only">Contraseña</label>
-                                <input type="password" class="form-control form-control-lg" id="password" placeholder="Ingrese su contraseña">
-                            </div>
-
-                            <div class="form-group d-flex justify-content-between">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" checked="" id="checkbox-remember">
-                                    <label class="custom-control-label" for="checkbox-remember">Recordarme</label>
-                                </div>
-                                <a href="./password-reset.html">Reestablecer contraseña</a>
-                            </div>
-
-                            <!-- Submit -->
-                            <button class="btn btn-lg btn-block btn-primary" type="submit">Inicio de Sesión</button>
-                        </form>
-
-                        <!-- Text -->
-                        <p class="text-center">
-                            Aún no tiene una cuenta? <a [routerLink]="['/registro']" >Registrar</a>.
-                        </p>
-
+                <!-- Form -->
+                <form class="mb-6" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email" class="sr-only">Correo Electronico</label>
+                        <input type="email" class="form-control form-control-lg" id="email" placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="user.email" required>
                     </div>
-                </div> <!-- / .row -->
-            </div>
 
-        </div><!-- .layout -->
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password" class="sr-only">Contraseña</label>
+                        <input type="password" class="form-control form-control-lg" id="password" placeholder="Contraseña" #password="ngModel" name="password" [(ngModel)]="user.password" required>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" checked="" id="checkbox-remember">
+                            <label class="custom-control-label" for="checkbox-remember">Recordarme</label>
+                        </div>
+                        <a href="./password-reset.html">Olvidaste tu contraseña</a>
+                    </div>
+
+                    <!-- Submit -->
+                    <button class="btn btn-lg btn-block btn-primary" type="submit">INICIAR</button>
+                </form>
+
+                <!-- Text -->
+                <p class="text-center">
+                    No tienes cuenta aun? <a [routerLink]="['/registro']">Registrarse</a>.
+                </p>
+
+            </div>
+        </div> <!-- / .row -->
+    </div>
+
+</div><!-- .layout --> 
