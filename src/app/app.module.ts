@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 
 import { appRoutingProviders, routing } from "./app.routing";
 import { MessengerComponent } from './components/messenger/messenger.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { MessengerComponent } from './components/messenger/messenger.component';
     RegistroComponent,
     LoginComponent,
     MessengerComponent,
+    PerfilComponent,
     //LoginsComponent
   ],
   imports: [
