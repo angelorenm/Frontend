@@ -84,4 +84,22 @@ export class UserService {
     }
     return identity
    }
+   
+   update_config (data):Observable<any>{
+    console.log(data);
+    
+    const fd = new FormData();
+    fd.append('nombre',data.nombre)
+    fd.append('telefono',data.telefono)
+    fd.append('imagen',data.imagen)
+    if(data.password){
+      fd.append('password',data.password)
+    }
+    fd.append('bio',data.bio)
+    fd.append('facebook',data.facebook)
+    fd.append('estado',data.estado)
+    
+    return this._http.put(this.url+'usuario/editar/'+data._id,fd)
+   }
+
 }

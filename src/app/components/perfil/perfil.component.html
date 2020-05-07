@@ -1,1 +1,339 @@
-<p>perfil works!</p>
+<div class="layout">
+
+    <!-- Navigation -->
+    <div class="navigation navbar navbar-light justify-content-center py-xl-7">
+
+        <!-- Brand -->
+        <a  class="d-none d-xl-block mb-6">
+            <img src="assets/images/brand.svg" class="mx-auto fill-primary" data-inject-svg="" alt="" style="height: 46px;">
+        </a>
+
+        <!-- Menu -->
+        <ul class="nav navbar-nav flex-row flex-xl-column flex-grow-1 justify-content-between justify-content-xl-center py-3 py-lg-0" role="tablist">
+
+            <!-- Chats -->
+            <li class="nav-item mt-xl-9">
+                <a class="nav-link position-relative p-0 py-xl-3 active" [routerLink]="['/messenger']" data-toggle="tab" title="Chats" role="tab">
+                    <i class="icon-lg fe-message-square"></i>
+                    <div class="badge badge-dot badge-primary badge-bottom-center"></div>
+                </a>
+            </li>
+
+
+        </ul>
+        <!-- Menu -->
+
+    </div>
+    <!-- Navigation -->
+
+   
+
+    <!-- Main Content -->
+    <div class="main main-visible" data-mobile-height="">
+
+        
+            <!-- Chat -->
+        <div class="chat">
+
+            <!-- Chat: body -->
+            <div class="chat-body">
+                
+                <!-- Chat: Header -->
+                <div class="chat-header border-bottom py-4 py-lg-6 px-lg-8">
+                    <div class="container-xxl">
+
+                        <div class="row align-items-center">
+
+                            <!-- Close chat(mobile) -->
+                            <div class="col-3 d-xl-none">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        <a class="text-muted px-0"  data-chat="open">
+                                            <i class="icon-md fe-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Chat photo -->
+                            <div class="col-6 col-xl-6">
+                                <div class="media text-center text-xl-left">
+                                    <div class="media-body align-self-center text-truncate">
+                                        <h6 class="text-truncate mb-n1">Configuraciones</h6>
+                                        <small class="text-muted">Edite su perfil</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- .row -->
+
+                    </div>
+                </div>
+                <!-- Chat: Header -->
+                
+                <!-- Chat: Content-->
+                <div class="chat-content px-lg-8" style="background: #ebebeb !important;">
+                    <form #configForm="ngForm" (ngSubmit)="OnSubmit(configForm)">
+                        <div class="container-xxl py-6 py-lg-10">
+                            <div *ngIf="msm_success" class="alert alert-success alert-dismissible fade show" role="alert"  >
+                                {{msm_success}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                        <button class="btn btn-lg btn-primary mb-4" type="submit">Guardar cambios</button>
+                        <!-- Accordion -->
+                        <div class="accordion modified-accordion mb-n6 mb-lg-8" id="profile-settings">
+                            <div class="card-columns">
+
+                                
+
+                                <!-- Card -->
+                                <div class="card mb-6 mb-lg-8">
+                                    <div class="card-header position-relative">
+                                        <a  class="text-reset d-block stretched-link collapsed"  data-target="#profile-settings-account" aria-controls="profile-settings-account" aria-expanded="true">
+                                            <div class="row no-gutters align-items-center">
+                                                <!-- Title -->
+                                                <div class="col">
+                                                    <h5>Cuenta</h5>
+                                                    <p>Datos del usuario.</p>
+                                                </div>
+
+                                                <!-- Icon -->
+                                                <div class="col-auto">
+                                                    <i class="text-muted icon-md fe-user"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div id="profile-settings-account" class="collapse show" data-parent="#profile-settings">
+                                        <div class="card-body">
+                                        
+                                                <div class="form-group">
+                                                  
+                                                    <img [src]="imgselected || url + 'usuario/img/' + datos_user.imagen" class="rounded" style="width: 150px;display:block;
+                                                    margin:auto;margin-bottom: 30px">
+                                                    <div class="position-relative text-center bg-secondary rounded p-6">
+                                                        <div class="avatar bg-primary text-white mb-5">
+                                                            <i class="icon-md fe-image"></i>
+                                                        </div>
+
+                                                        <p class="small text-muted mb-0">Solo archivos jpg, gif o png. <br> Max 3mb.</p>
+                                                        <input id="upload-user-photo"  class="d-none" type="file" (change)=" imgSelect($event)" >
+                                                        <label class="stretched-label mb-0" for="upload-user-photo"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="small" for="profile-name">Nombres</label>
+                                                    <input class="form-control form-control-lg" id="profile-name" type="text" #nombre="ngModel" name="nombre" [(ngModel)]="data.nombre" required>
+                                                    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                                                        <div class="invalid-feedback" style="display: block !important;" *ngIf="nombre.errors.required">
+                                                            El nombre es requerido
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="small" for="profile-phone">Telefono</label>
+                                                    <input class="form-control form-control-lg" id="profile-phone" type="text" #telefono="ngModel" name="telefono" [(ngModel)]="data.telefono" >
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="small" for="profile-email">Correo Electrónico</label>
+                                                    <input class="form-control form-control-lg" readonly id="profile-email" type="email" value ="{{data.email}}" readonly >
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="small" for="profile-about">Biografía</label>
+                                                    <textarea class="form-control form-control-lg" id="profile-about" rows="3" placeholder="Escribe sobre ti" data-autosize="true" #bio="ngModel" name="bio" [(ngModel)]="data.bio" ></textarea>
+                                                </div>
+
+                                                
+                                            
+                                        </div>
+                                    </div><!-- .collapse -->
+
+                                </div>
+                                <!-- Card -->
+
+                                <!-- Card -->
+                                <div class="card mb-6 mb-lg-8">
+                                    <div class="card-header position-relative">
+                                        <a  class="text-reset d-block stretched-link collapsed"  data-target="#profile-settings-notifications" aria-controls="profile-settings-notifications" aria-expanded="true">
+                                            <div class="row no-gutters align-items-center">
+                                                <!-- Title -->
+                                                <div class="col">
+                                                    <h5>Configuraciones</h5>
+                                                    <p>Configuraciones de tu cuenta.</p>
+                                                </div>
+
+                                                <!-- Icon -->
+                                                <div class="col-auto">
+                                                    <i class="text-muted icon-md fe-bell"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div id="profile-settings-notifications" class="collapse show" data-parent="#profile-settings">
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                             
+                                                <li class="list-group-item px-0">
+                                                    <div class="d-flex justify-content-between mb-2">
+                                                        <!-- Title -->
+                                                        <h6 class="mb-0">Estado</h6>
+
+                                                        <!-- Switch -->
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input" id="custom-switch-2" #estado="ngModel" name="estado" [(ngModel)]="data.estado">
+                                                            <label class="custom-control-label" for="custom-switch-2"></label>
+                                                        </div>
+                                                    </div>
+                                                    <p>Activarr y/o desactivar estado de cuenta.</p>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div><!-- .collapse -->
+
+                                </div>
+                                <!-- Card -->
+
+                                <!-- Card -->
+                                <div class="card mb-6 mb-lg-8">
+                                    <div class="card-header position-relative">
+                                        <a  class="text-reset d-block stretched-link collapsed"  data-target="#profile-settings-security" aria-expanded="true" aria-controls="profile-settings-security">
+                                            <div class="row no-gutters align-items-center">
+                                                <!-- Title -->
+                                                <div class="col">
+                                                    <h5>Seguridad</h5>
+                                                    <p>Configuracion de seguridad de tu cuenta.</p>
+                                                </div>
+
+                                                <!-- Icon -->
+                                                <div class="col-auto">
+                                                    <i class="text-muted icon-md fe-shield"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div id="profile-settings-security" class="collapse show" data-parent="#profile-settings">
+                                        <div class="card-body">
+                                        
+
+                                                <div class="form-group">
+                                                    <label class="small" for="new-password">Nueva contraseña</label>
+                                                    <input id="new-password" type="password" class="form-control form-control-lg" placeholder="Nueva contraseña" #password="ngModel" name="password" [(ngModel)]="passwordText">
+                                                    <div *ngIf="msm_error" style="width: 100%">
+                                                        <div class="invalid-feedback" style="display: block;">
+                                                           {{msm_error}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="small" for="verify-password">Confirmación</label>
+                                                    <input id="verify-password" type="password" class="form-control form-control-lg" placeholder="Verificación de contraseña" #confirm_password="ngModel" name="confirm_password" [(ngModel)]="confirm_passwordText">
+                                                </div>
+
+                                            
+                                           
+                                        </div>
+                                    </div><!-- .collapse -->
+
+                                </div>
+                                <!-- Card -->
+
+                                <!-- Card -->
+                                <div class="card mb-6 mb-lg-8">
+                                    <div class="card-header position-relative">
+                                        <a  class="text-reset d-block stretched-link collapsed"  data-target="#profile-settings-social" aria-controls="profile-settings-social" aria-expanded="true">
+                                            <div class="row no-gutters align-items-center">
+                                                <!-- Title -->
+                                                <div class="col">
+                                                    <h5>Redes Sociales</h5>
+                                                    <p>Vincula tus redes sociales.</p>
+                                                </div>
+
+                                                <!-- Icon -->
+                                                <div class="col-auto">
+                                                    <i class="text-muted icon-md fe-share-2"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div id="profile-settings-social" class="collapse show" data-parent="#profile-settings">
+                                        <div class="card-body">
+
+                                         
+                                                <!-- Twitter -->
+                                                <div class="form-group">
+                                                    <label class="small" for="profile-twitter">Twitter</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="btn btn-ico btn-secondary btn-minimal">
+                                                                <i class="fe-twitter"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input id="profile-twitter" type="text" class="form-control form-control-lg" placeholder="Enlace de cuenta" aria-label="Username" >
+                                                    </div>
+                                                </div>
+
+                                                <!-- Facebook -->
+                                                <div class="form-group">
+                                                    <label class="small" for="profile-facebook">Facebook</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="btn btn-ico btn-secondary btn-minimal">
+                                                                <i class="fe-facebook"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input id="profile-facebook" type="text" class="form-control form-control-lg" placeholder="Username" placeholder="Enlace de cuenta" aria-label="Username" #facebook="ngModel" name="facebook" [(ngModel)]="data.facebook">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Github -->
+                                                <div class="form-group">
+                                                    <label class="small" for="profile-github">Github</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="btn btn-ico btn-secondary btn-minimal">
+                                                                <i class="fe-github"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input id="profile-github" type="text" class="form-control form-control-lg" placeholder="Enlace de cuenta" aria-label="Username" >
+                                                    </div>
+                                                </div>
+                              
+                                        </div>
+                                    </div><!-- .collapse -->
+
+                                </div>
+                                <!-- Card -->
+
+                            </div>
+                        </div>
+                        <!-- Accordion -->
+
+                        </div>
+                    </form>
+                </div>
+                <!-- Chat: Content -->
+               
+            </div>
+            <!-- Chat: body -->
+
+        </div>
+        <!-- Chat -->
+        
+
+    </div>
+    <!-- Main Content -->
+
+</div>
+<!-- Layout -->
